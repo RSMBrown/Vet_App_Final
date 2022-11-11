@@ -1,0 +1,14 @@
+h1 
+    | Welcome
+    =@name
+    | , to the Vet App
+
+=link_to "Sign up", user_sign_up_path
+br 
+=link_to "Log in", user_log_in_path
+
+-if @user.present?
+    -if @user.role == 'owner'
+        =link_to "My pets", user_pets_path(user_id: @user.id)
+    -else 
+        =link_to "Patients", user_pets_path(user_id: @user.id)
