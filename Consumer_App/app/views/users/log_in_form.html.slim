@@ -1,0 +1,14 @@
+h1 
+    |  Log into exsiting account 
+
+=form_with url: '/log_in', method: :post do |form|
+    =form.label "Email "
+    =form.text_field :email
+    br 
+    br
+    =form.label "Password "
+    =form.text_field :password
+    br
+    br 
+
+    =form.submit("Log in")

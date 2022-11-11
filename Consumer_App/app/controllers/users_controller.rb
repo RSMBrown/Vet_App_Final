@@ -1,31 +1,33 @@
 class UsersController < ApplicationController
+    require 'rest-client'
+    before_action :auth
 
-    def sign_up 
-        @user = VetApi.new
+    def sign_up_form
     end 
 
-    def create 
-        @user = VetApi.create(user_params)
+    def log_in_form
+    end 
 
-        if @user.save
-            redirect_to root_path 
-        else 
-            render :sign_up
-        end 
+    def sign_up
+        redirect_to root_path(user_id: @user.id)
     end 
 
     def log_in
-        @user = VetApi.find_by(user_params[:email])
-        if @user.present? 
-            redirect_to root_path(user_id: @user.id)
-        else
-            flash[:alert] = "Log in failed, please create an account"
-        end 
+        @user = request_api_log_in
+        redirect_to root_path(user_id: @user.id)
     end 
 
     private 
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :role)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
     end 
+
+    def request_api_log_in
+        response = RestClient.get "http://127.0.0.1:3000/auth/login"
+
+        return nil if response.status != 200 
+
+        JSON.parse(response.body)
+    end
 end

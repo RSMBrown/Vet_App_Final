@@ -1,5 +1,4 @@
 class AppointmentsController < ApplicationController
-    before_action :authorize_request
     
     def index 
         @pet = Pet.find(params[:pet_id])

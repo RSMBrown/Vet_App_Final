@@ -1,0 +1,21 @@
+h1 
+    | Sign up for the Vet App 
+
+=form_with url: '/sign_up', method: :post do |form|
+    =form.label "Email "
+    =form.text_field :email
+    br
+    br 
+    =form.label "Password "
+    =form.text_field :password
+    br
+    br 
+    =form.label "Password confirmation "
+    =form.text_field :passwrod_confirmation
+    br
+    br 
+    =form.label "Role: "
+    =form.select :role, ["Vet", "Owner"], selected: "Owner"
+    br
+    br 
+    =form.submit("Sign up")
