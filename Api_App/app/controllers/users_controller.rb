@@ -7,20 +7,21 @@ class UsersController < ApplicationController
     end 
 
     def show 
-        @user = User.find(params[:id])
+        @user = User.find(params[:user_id])
         json_response(@user)
     end
 
     def log_in
         @user = User.find_by(params[:email])
-        # auth_token = AuthenticateUser.new(user.name, user.email, user.password).call
-        json_response(@user)
+        auth_token = AuthenticateUser.new(user.name, user.email, user.password).call
+        response = {user_id: @user.id, auth_token: auth_token }
+        json_response(response)
     end 
 
     def create
         user = User.create!(user_params)
         auth_token = AuthenticateUser.new(user.name, user.email, user.password).call
-        response = { message: Message.account_created, auth_token: auth_token }
+        response = { message: Message.account_created, auth_token: auth_token, user_id: user.id }
         json_response(response, :created)
     end
   

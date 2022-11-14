@@ -1,0 +1,11 @@
+h1 
+    | All Users 
+
+-@users.each do |user|
+    =user["name"]
+    |,  
+    =user["email"]
+    |,  
+    =user["role"]
+    br 
+    br 

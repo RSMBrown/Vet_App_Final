@@ -9349,3 +9349,443 @@ Started GET "/auth/login" for 127.0.0.1 at 2022-11-11 16:01:05 +0200
   
 ActionController::RoutingError (No route matches [GET] "/auth/login"):
   
+Started GET "/users" for ::1 at 2022-11-14 13:12:17 +0200
+  [1m[35m (5.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+Completed 422 Unprocessable Entity in 11ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 459)
+
+
+Started GET "/auth/login?email=ash@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 13:13:32 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/auth/login"):
+  
+Started POST "/auth/login?email=ash@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 13:13:37 +0200
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"ash@owner.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 200 OK in 1092ms (Views: 0.2ms | ActiveRecord: 12.4ms | Allocations: 8451)
+
+
+Started GET "/users" for ::1 at 2022-11-14 13:14:27 +0200
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 30ms (Views: 23.9ms | ActiveRecord: 3.2ms | Allocations: 9579)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:28:43 +0200
+Processing by UsersController#index as */*
+Completed 422 Unprocessable Entity in 4ms (Views: 0.2ms | Allocations: 328)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:29:35 +0200
+Processing by UsersController#index as */*
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | Allocations: 95)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:31:55 +0200
+Processing by UsersController#index as */*
+Completed 422 Unprocessable Entity in 0ms (Views: 0.2ms | Allocations: 95)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:34:04 +0200
+Processing by UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 39ms (Views: 12.3ms | ActiveRecord: 1.0ms | Allocations: 15185)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 13:37:45 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 818)
+
+
+Started GET "/" for ::1 at 2022-11-14 13:48:54 +0200
+  
+ActionController::RoutingError (uninitialized constant HomesController):
+  
+Started GET "/favicon.ico" for ::1 at 2022-11-14 13:48:54 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:50:00 +0200
+Processing by UsersController#index as JSON
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | Allocations: 176)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:50:32 +0200
+Processing by UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 20ms (Views: 16.2ms | ActiveRecord: 1.1ms | Allocations: 9867)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:51:01 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.5ms | Allocations: 9358)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:54:03 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 15ms (Views: 12.4ms | ActiveRecord: 0.5ms | Allocations: 9358)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:55:12 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 61ms (Views: 57.6ms | ActiveRecord: 0.5ms | Allocations: 9374)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:55:45 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 14ms (Views: 12.1ms | ActiveRecord: 0.5ms | Allocations: 9376)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 13:56:12 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 14ms (Views: 12.2ms | ActiveRecord: 0.5ms | Allocations: 9358)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 14:01:29 +0200
+Processing by UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 23ms (Views: 14.4ms | ActiveRecord: 4.2ms | Allocations: 9870)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 14:04:16 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 14ms (Views: 11.9ms | ActiveRecord: 0.5ms | Allocations: 9358)
+
+
+Started POST "/signup?name=sam&email=sam@owner.com&password=[FILTERED]&password_confirmation=[FILTERED]&role=%22owner%22" for ::1 at 2022-11-14 14:31:10 +0200
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"sam", "email"=>"sam@owner.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"\"owner\""}
+[31mUnpermitted parameter: :role[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[36mUser Create (3.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "sam"], ["email", "sam@owner.com"], ["password_digest", "$2a$12$fffFK30VziZFl6V5II617.nBhC451m1NohMxHSXRO.PtoIzg4K8va"], ["created_at", "2022-11-14 12:31:10.655806"], ["updated_at", "2022-11-14 12:31:10.655806"]]
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 201 Created in 936ms (Views: 0.2ms | ActiveRecord: 7.2ms | Allocations: 10400)
+
+
+Started GET "/users/:user_id" for 127.0.0.1 at 2022-11-14 15:00:10 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>":user_id"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 15ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 5106)
+
+
+Started GET "/users/:user_id" for 127.0.0.1 at 2022-11-14 15:00:40 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>":user_id"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 645)
+
+
+Started GET "/users/user_id/pets" for 127.0.0.1 at 2022-11-14 15:00:40 +0200
+Processing by PetsController#index as JSON
+  Parameters: {"user_id"=>"user_id"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:4:in `index'
+Completed 404 Not Found in 3ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 1016)
+
+
+Started GET "/users/:user_id" for 127.0.0.1 at 2022-11-14 15:01:18 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>":user_id"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 645)
+
+
+Started GET "/users/user_id/pets" for 127.0.0.1 at 2022-11-14 15:01:18 +0200
+Processing by PetsController#index as JSON
+  Parameters: {"user_id"=>"user_id"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/pets_controller.rb:4:in `index'
+Completed 404 Not Found in 3ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 991)
+
+
+Started GET "/users/user_id" for 127.0.0.1 at 2022-11-14 15:03:50 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"user_id"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 645)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:03:50 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users/user_id" for 127.0.0.1 at 2022-11-14 15:05:24 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"user_id"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 645)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:05:24 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users/user_id" for 127.0.0.1 at 2022-11-14 15:05:27 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"user_id"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:05:27 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 3ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users/user_id" for 127.0.0.1 at 2022-11-14 15:05:28 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"user_id"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:05:28 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users/47" for 127.0.0.1 at 2022-11-14 15:07:11 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"47"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:07:11 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 645)
+
+
+Started GET "/users/47" for 127.0.0.1 at 2022-11-14 15:41:06 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"47"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 7ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 1122)
+
+
+Started GET "/users//pets" for 127.0.0.1 at 2022-11-14 15:41:06 +0200
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"pets"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 645)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-11-14 15:44:41 +0200
+Processing by UsersController#create as JSON
+Completed 422 Unprocessable Entity in 1398ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 350338)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-11-14 15:45:21 +0200
+Processing by UsersController#create as JSON
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 2141)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-11-14 15:45:30 +0200
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:17:in `user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.7ms | Allocations: 9523)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 15:47:08 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 885)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 15:47:48 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 690)
+
+
+Started POST "/auth/login?email=sam@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 15:50:03 +0200
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"sam@owner.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 200 OK in 629ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1185)
+
+
+Started POST "/auth/login?email=sam@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 15:52:48 +0200
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"sam@owner.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/authentication_controller.rb:5:in `authenticate'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (sam@owner.com) LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:5:in `authenticate'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.0ms | Allocations: 2136)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: near "@owner": syntax error):
+  
+app/controllers/authentication_controller.rb:5:in `authenticate'
+Started POST "/auth/login?email=sam@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 15:53:48 +0200
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"sam@owner.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (sam@owner.com) LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:6:in `authenticate'
+Completed 500 Internal Server Error in 678ms (ActiveRecord: 2.2ms | Allocations: 6493)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: near "@owner": syntax error):
+  
+app/controllers/authentication_controller.rb:6:in `authenticate'
+Started POST "/auth/login?email=sam@owner.com&password=[FILTERED]" for ::1 at 2022-11-14 15:54:13 +0200
+Processing by AuthenticationController#authenticate as */*
+  Parameters: {"email"=>"sam@owner.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sam@owner.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 200 OK in 888ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 5912)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 15:55:24 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 16ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 2297)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 16:13:35 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1234)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2022-11-14 16:14:32 +0200
+Processing by AuthenticationController#authenticate as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:17:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.6ms | ActiveRecord: 0.4ms | Allocations: 690)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-11-14 16:16:30 +0200
+Processing by UsersController#create as JSON
+Completed 422 Unprocessable Entity in 8ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 2325)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-11-14 16:16:55 +0200
+Processing by UsersController#create as JSON
+Completed 422 Unprocessable Entity in 7ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 2137)
+
+
+Started POST "/signup" for 127.0.0.1 at 2022-11-14 16:20:57 +0200
+Processing by UsersController#create as JSON
+Completed 422 Unprocessable Entity in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 2137)
+
+

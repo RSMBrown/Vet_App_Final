@@ -6,9 +6,6 @@ h1
 =link_to "Sign up", sign_up_form_path
 br 
 =link_to "Log in", log_in_form_path
-
--if @user.present?
-    -if @user.role == 'owner'
-        =link_to "My pets", user_pets_path(user_id: @user.id)
-    -else 
-        =link_to "Patients", user_pets_path(user_id: @user.id)
+br
+=link_to "My pets", user_pets_path(user_id: 47)
+br 
