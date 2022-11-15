@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2022_11_08_083816) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "pet_id"
-    t.date "date"
+    t.string "date"
     t.string "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_11_08_083816) do
     t.string "name"
     t.string "pet_type"
     t.string "breed"
+    t.string "dr"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_pets_on_user_id"

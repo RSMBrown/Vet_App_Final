@@ -4,8 +4,17 @@ class UsersController < ApplicationController
     def index
         @users = HTTParty.get("http://127.0.0.1:3000/users", headers: {
             "Accept" => "application/json", 
-            "Authorization" => "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MSwiZXhwIjoxNjY4NTEwODE5fQ.RD2-URoyoGdXmCfFoWWKi4oxTG88pkBN78CV-nf7EAM"
+            "Authorization" => cookies[:auth_token]
             })
+        @vets = []
+        @owners = []
+        @users.each do |user|
+            if user['role'] == "vet"
+                @vets.push(user)
+            else 
+                @owners.push(user)
+            end 
+        end 
     end 
 
     def sign_up_form
@@ -17,17 +26,17 @@ class UsersController < ApplicationController
     def sign_up
         @response = HTTParty.post("http://127.0.0.1:3000/signup",
             headers: {"Accept" => "application/json"}, 
-            params => {
+            body: {
                 'name' => params[:name],
                 'email' => params[:email],
                 'password' => params[:password],
                 'password_confirmation' => params[:password_confirmation],
                 'role' => params[:role]
             })
+        
+        cookies[:user_id] = @response['user_id']
         @user_id = @response['user_id']
-        cookies[:auth_token] = @response['authenticity_token']
-
-        binding.pry
+        cookies[:auth_token] = @response['auth_token']
 
         redirect_to root_path(user_id: @user_id)
     end 
@@ -35,14 +44,22 @@ class UsersController < ApplicationController
     def log_in
         @response = HTTParty.post("http://127.0.0.1:3000/auth/login",
             headers: {
-                "Accept" => "application/json"}, 
-                params => user_params)
-        cookies[:auth_token] = @response['authenticity_token']
-        @user_id = @response['user_id'] 
+                "Accept" => "application/json"
+            },
+            body: {
+                'email' => params[:email], 
+                'password' => params[:password]
+            })
 
-        binding.pry
+        if @reponse == {"message"=>"Invalid credentials"}
+            redirect_to root_path
+        else 
+            cookies[:user_id] = @response['user_id']
+            cookies[:auth_token] = @response['auth_token']
+            @user_id = @response['user_id']
 
-        redirect_to root_path(user_id: @user.id)
+            redirect_to root_path(user_id: @user_id)
+        end   
     end 
 
     private 

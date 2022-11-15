@@ -1,0 +1,22 @@
+h1 
+    =@pet['name']
+    |  the 
+    =@pet['breed']
+    |   
+    =@pet['pet_type']
+br
+ 
+h1 
+    | Appointments with 
+    =@pet['dr']
+    br 
+h3 
+    -@appointments.each do |appointment|
+        =appointment['date']
+        | ,   
+        =appointment['time']
+        br  
+br 
+=link_to "New Appointment", new_user_pet_appointment_path(user_id: @user_id, pet_id: @pet_id)
+br 
+=link_to "All pets", user_pets_path(user_id: @user_id, pet_id: @pet_id)

@@ -29,9 +29,14 @@ class PetsController < ApplicationController
         head :no_content
     end 
 
+    def all_pets 
+        @pets = Pet.all
+        json_response(@pets)
+    end 
+
     private 
 
     def pet_params
-        params.permit(:name, :pet_type, :breed)
+        params.permit(:name, :pet_type, :breed, :dr, :user_id)
     end 
 end

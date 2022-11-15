@@ -1,0 +1,23 @@
+h1 
+    | New Pet 
+
+=form_with url: '/users/:user_id/pets', method: :post do |form|
+
+    =form.label "Name of pet "
+    =form.text_field :name
+    br 
+    br
+    =form.label "Pet type "
+    =form.text_field :pet_type
+    br
+    br
+    =form.label "Breed "
+    =form.text_field :breed
+    br
+    br 
+    =form.label "Pets Dr: "
+    =form.select :dr, @vets.collect {|vet| [vet['name'], vet['name']]} , prompt: 'Choose one...'
+    br
+    br
+
+    =form.submit("Submit")

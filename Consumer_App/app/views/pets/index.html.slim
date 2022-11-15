@@ -1,3 +1,43 @@
-h1 
-    | Pets
+-if @user['role'] == 'owner'
+    h1 
+        | Pets
 
+    -@pets.each do |pet|
+        li
+            -pet_id = pet['id']
+            -user_id = pet['user_id']
+            =link_to pet['name'], user_pet_path(id: pet_id, user_id: user_id)
+            |, 
+            =pet['pet_type']
+            |, 
+            =pet['breed']
+            br 
+        =link_to "Edit pet", edit_user_pet_path(id: pet_id, user_id: user_id)
+        br 
+        =link_to "Remove pet", user_pet_path(id: pet_id, user_id: user_id), method: :delete, data: { confrim: "Are you sure?" }
+        br
+        =pet['name']
+        |'s Doctor: 
+        =pet['dr']
+        br
+        br 
+        br
+
+    br
+    =link_to "Add pet", new_user_pet_path
+    br 
+    br
+
+-elsif @user['role'] == 'vet'
+    h1 
+        | Patients 
+
+    -@patients.each do |pet|
+        li 
+            -pet_id = pet['id']
+            -user_id = pet['user_id']
+            =link_to pet['name'], user_pet_path(id: pet_id, user_id: user_id)
+            | ,   
+            =pet['pet_type']
+            |,   
+            =pet['breed']

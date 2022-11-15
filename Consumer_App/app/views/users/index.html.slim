@@ -1,11 +1,23 @@
 h1 
-    | All Users 
+    | All Vets
 
--@users.each do |user|
-    =user["name"]
+-@vets.each do |vet|
+    =vet["name"]
     |,  
-    =user["email"]
+    =vet["email"]
     |,  
-    =user["role"]
+    =vet["role"]
+    br 
+    br 
+
+h1 
+    | All Owners
+
+-@owners.each do |owner|
+    =owner["name"]
+    |,  
+    =owner["email"]
+    |,  
+    =owner["role"]
     br 
     br 

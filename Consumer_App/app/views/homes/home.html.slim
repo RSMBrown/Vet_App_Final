@@ -3,9 +3,10 @@ h1
     = @name
     | , to the Vet App
 
-=link_to "Sign up", sign_up_form_path
-br 
-=link_to "Log in", log_in_form_path
-br
-=link_to "My pets", user_pets_path(user_id: 47)
-br 
+-if @name == "Stranger"
+    =link_to "Sign up", sign_up_form_path
+    br 
+    =link_to "Log in", log_in_form_path
+    br
+-else 
+    =link_to "My pets", user_pets_path(user_id: @user_id)

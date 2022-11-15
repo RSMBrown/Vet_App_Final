@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
-    def index 
+    def home 
         @user = User.find(params[:user_id])
         json_response(@user)
-    end
+    end 
 end 

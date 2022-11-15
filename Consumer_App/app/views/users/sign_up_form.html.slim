@@ -2,6 +2,10 @@ h1
     | Sign up for the Vet App 
 
 =form_with url: '/sign_up', method: :post do |form|
+    =form.label "Name "
+    =form.text_field :name 
+    br
+    br
     =form.label "Email "
     =form.text_field :email
     br
@@ -15,7 +19,7 @@ h1
     br
     br 
     =form.label "Role: "
-    =form.select :role, ["Vet", "Owner"], selected: "Owner"
+    =form.select :role, ["vet", "owner"], selected: "owner"
     br
     br 
     =form.submit("Sign up")
