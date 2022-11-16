@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 50.times do
-    user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: 'owner')
+    user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: '123123', role: 'owner')
     10.times do 
         pet = user.pets.create(name: Faker::Name.name, breed: Faker::Lorem.word, pet_type: 'dog')
         4.times do 
@@ -17,5 +17,5 @@
 end
 
 10.times do 
-    user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: 'vet')
+    user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: '123123', role: 'vet')
 end 

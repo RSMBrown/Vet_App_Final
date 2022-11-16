@@ -1,70 +1,42 @@
 class UsersController < ApplicationController
     before_action :auth
+    
+    def sign_up
+        @response = UserService.sign_up(params[:name], params[:email], params[:password], params[:password_confirmation], params[:role])
+        
+        if @response['message'] == "Account created successfully"
+            flash[:success] = "Sign up successful!"
+            cookies[:user_id] = @response['user_id']
+            @user_id = @response['user_id']
+            cookies[:auth_token] = @response['auth_token']
 
-    def index
-        @users = HTTParty.get("http://127.0.0.1:3000/users", headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]
-            })
-        @vets = []
-        @owners = []
-        @users.each do |user|
-            if user['role'] == "vet"
-                @vets.push(user)
-            else 
-                @owners.push(user)
-            end 
+            redirect_to root_path(user_id: @user_id)
+        else 
+            flash[:alert] = "Sign up failed"
+            redirect_to root_path
         end 
     end 
 
-    def sign_up_form
-    end 
-
-    def log_in_form
-    end 
-
-    def sign_up
-        @response = HTTParty.post("http://127.0.0.1:3000/signup",
-            headers: {"Accept" => "application/json"}, 
-            body: {
-                'name' => params[:name],
-                'email' => params[:email],
-                'password' => params[:password],
-                'password_confirmation' => params[:password_confirmation],
-                'role' => params[:role]
-            })
-        
-        cookies[:user_id] = @response['user_id']
-        @user_id = @response['user_id']
-        cookies[:auth_token] = @response['auth_token']
-
-        redirect_to root_path(user_id: @user_id)
-    end 
-
     def log_in
-        @response = HTTParty.post("http://127.0.0.1:3000/auth/login",
-            headers: {
-                "Accept" => "application/json"
-            },
-            body: {
-                'email' => params[:email], 
-                'password' => params[:password]
-            })
+        @response = UserService.log_in(params[:email], params[:password])
 
-        if @reponse == {"message"=>"Invalid credentials"}
-            redirect_to root_path
-        else 
+        if @response['auth_token'].present?
+            flash[:success] = "Logged in successfully!"
             cookies[:user_id] = @response['user_id']
             cookies[:auth_token] = @response['auth_token']
             @user_id = @response['user_id']
 
             redirect_to root_path(user_id: @user_id)
+        else 
+            flash[:alert] = "Log in failed"
+            redirect_to root_path
         end   
     end 
 
-    private 
+    def log_out 
+        cookies[:user_id] = nil 
+        cookies[:auth_token] = nil 
 
-    def user_params
-        params.permit(:name, :email, :password, :password_confirmation, :role)
+        redirect_to root_path
     end 
 end

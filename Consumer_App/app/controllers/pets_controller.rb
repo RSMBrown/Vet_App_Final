@@ -3,134 +3,63 @@ class PetsController < ApplicationController
 
     def index 
         @user_id = cookies[:user_id]
-        @user = HTTParty.get("http://127.0.0.1:3000/users/#{@user_id}", 
-        headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]
-        },
-        body: {user_id: @user_id})
-
-        @pets = HTTParty.get("http://127.0.0.1:3000/users/#{@user_id}/pets", 
-            headers: {
-                "Accept" => "application/json", 
-                "Authorization" => cookies[:auth_token]
-            })
+        auth = cookies[:auth_token]
+        @user = UserService.user(@user_id, auth)
+        @pets = PetService.all_user_pets(@user_id, auth)
 
         if @user['role'] == 'vet'
-            @patients = []
-            @pets = HTTParty.get("http://127.0.0.1:3000/all_pets", 
-                headers: {
-                    "Accept" => "application/json", 
-                    "Authorization" => cookies[:auth_token]
-                })
-            @pets.each do |pet|
-                if pet['dr'] == @user['name']
-                    @patients.push(pet)
-                end 
-            end 
+            @pets = PetService.all_pets(auth)
+            @patients = PetService.patients(@user, @pets)
         end 
     end 
 
     def show 
         cookies[:pet_id] = params[:id]
+        auth = cookies[:auth_token]
         @pet_id = cookies[:pet_id]
         @user_id = cookies[:user_id]
-
-        @pet = HTTParty.get("http://127.0.0.1:3000/users/#{@user_id}/pets/#{@pet_id}", 
-        headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]})
-
-        @appointments =  HTTParty.get("http://127.0.0.1:3000/users/#{@user_id}/pets/#{@pet_id}/appointments", 
-                headers: {
-                    "Accept" => "application/json", 
-                    "Authorization" => cookies[:auth_token]})
+        @user = UserService.user(@user_id, auth)
+        @pet = PetService.pet(@user_id, @pet_id, auth)
+        @appointments = AppointmentService.all_appointments(@user_id, @pet_id, auth)
     end 
 
     def new 
         @user_id = cookies[:user_id]
-        @users = HTTParty.get("http://127.0.0.1:3000/users", headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]
-            })
-        @vets = []
-        @users.each do |user|
-            if user['role'] == "vet"
-                @vets.push(user)
-            end 
-        end 
+        @users = UserService.all_users(auth)
+        @vets = UserService.vets(@users)
     end 
 
     def create 
         @user_id = cookies[:user_id]
-        @response = HTTParty.post("http://127.0.0.1:3000/users/#{@user_id}/pets", 
-        headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]}, 
-        body: {
-            user_id: pet_params[:user_id], 
-            name: pet_params[:name], 
-            pet_type: pet_params[:pet_type], 
-            breed: pet_params[:breed],
-            dr: pet_params[:dr]
-        })
-        @id = @response['id']
-
-        redirect_to user_pets_path(user_id: @user_id, id: @id)
+        auth = cookies[:auth_token]
+        @response = PetService.create_pet(@user_id, params[:name], params[:pet_type], params[:breed], params[:dr], auth)
+        @pet_id = @response['id']
+        redirect_to user_pets_path(user_id: @user_id, id: @pet_id)
     end 
 
     def edit 
         @user_id = cookies[:user_id]
-        @users = HTTParty.get("http://127.0.0.1:3000/users", headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]
-            })
-        @vets = []
-        @users.each do |user|
-            if user['role'] == "vet"
-                @vets.push(user)
-            end 
-        end 
+        auth = cookies[:auth_token]
+        @users = UserService.all_users(auth)
+        @vets = UserService.vets(@users)
         cookies[:pet_id] = params[:id]
     end 
 
     def update 
+        auth = cookies[:auth_token]
         @user_id = cookies[:user_id]
         @pet_id = cookies[:pet_id]
-        HTTParty.put("http://127.0.0.1:3000/users/#{@user_id}/pets/#{@pet_id}", 
-        headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]}, 
-        body: {
-            user_id: pet_params[:user_id], 
-            name: pet_params[:name], 
-            pet_type: pet_params[:pet_type], 
-            breed: pet_params[:breed],
-            dr: pet_params[:dr]
-        })
+        PetService.update_pet(@user_id, @pet_id, params[:name], params[:pet_type], params[:breed], params[:dr], auth)
 
         redirect_to user_pets_path(user_id: @user_id)
     end 
 
     def destroy 
+        auth = cookies[:auth_token]
         @user_id = cookies[:user_id]
-        @user = HTTParty.get("http://127.0.0.1:3000/users/#{@user_id}", 
-            headers: {
-                "Accept" => "application/json", 
-                "Authorization" => cookies[:auth_token]
-            })
-        @id = params[:id]
-        HTTParty.delete("http://127.0.0.1:3000/users/#{@user_id}/pets/#{@id}", 
-        headers: {
-            "Accept" => "application/json", 
-            "Authorization" => cookies[:auth_token]})
+        @pet_id = params[:id]
+        PetService.delete_pet(@user_id, @pet_id, auth)
 
         redirect_to user_pets_path(user_id: @user_id)
-    end 
-
-    private 
-
-    def pet_params
-        params.permit(:user_id, :name, :pet_type, :breed, :dr)
     end 
 end

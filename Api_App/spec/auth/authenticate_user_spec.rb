@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe AuthenticateUser do
     let(:user) { create(:user) }
-    subject(:valid_auth_obj) { described_class.new(user.name, user.email, user.password) }
-    subject(:invalid_auth_obj) { described_class.new('foobar', 'foo', 'bar') }
+    subject(:valid_auth_obj) { described_class.new(user.name, user.email, user.password, user.role) }
+    subject(:invalid_auth_obj) { described_class.new('foobar', 'foo', 'bar', 'vet') }
 
     describe '#call' do
         context 'when valid credentials' do

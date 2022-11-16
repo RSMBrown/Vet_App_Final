@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   post '/sign_up', to: 'users#sign_up'
   get '/log_in_form', to: 'users#log_in_form'
   post '/log_in', to: 'users#log_in'
+  get '/log_out', to: 'users#log_out'
 end

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
 
     def auth 
-        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MSwiZXhwIjoxNjY4MjUxNTMyfQ.ObX8RIgbqEUFS0TG6RcHbk5dbzlonOzKfzQgN6WlcnQ"
+        cookies[:auth_token]
     end 
 
 end 
